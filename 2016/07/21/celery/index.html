@@ -51,28 +51,19 @@
 
 
 
-<meta name="description" content="svn安装配置高级版本（使用httpd）
-环境系统： centos6.5svn版本： svn1.6
-安装svn安装svn，一般选择yum方式安装比较简单(注：如果你还不知道什么是yum那么你和六个月前的我是一样的，赶紧拿起鸟哥[不是鸟叔]狂撸一个月吧，保证你会爱上linux)
-[root@liyong ~]# yum -y install mod_dav_svn
-#会自动安装mod_dav_svn">
+<meta name="description" content="Celery学习使用及想法
+Celery学习1.Messages are sent to exchanges.2.An exchange routes messages to one or more queues. Several exchange types exists, providing different ways to do routing, or implementing diffe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="svn安装配置高级版本（使用httpd）">
-<meta property="og:url" content="http://yoursite.com/2016/01/03/svn安装配置高级版本（使用httpd）/index.html">
+<meta property="og:title" content="celery">
+<meta property="og:url" content="http://yoursite.com/2016/07/21/celery/index.html">
 <meta property="og:site_name" content="Yong-Lee's Blog">
-<meta property="og:description" content="svn安装配置高级版本（使用httpd）
-环境系统： centos6.5svn版本： svn1.6
-安装svn安装svn，一般选择yum方式安装比较简单(注：如果你还不知道什么是yum那么你和六个月前的我是一样的，赶紧拿起鸟哥[不是鸟叔]狂撸一个月吧，保证你会爱上linux)
-[root@liyong ~]# yum -y install mod_dav_svn
-#会自动安装mod_dav_svn">
-<meta property="og:updated_time" content="2016-01-02T17:32:36.000Z">
+<meta property="og:description" content="Celery学习使用及想法
+Celery学习1.Messages are sent to exchanges.2.An exchange routes messages to one or more queues. Several exchange types exists, providing different ways to do routing, or implementing diffe">
+<meta property="og:updated_time" content="2016-07-20T16:29:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="svn安装配置高级版本（使用httpd）">
-<meta name="twitter:description" content="svn安装配置高级版本（使用httpd）
-环境系统： centos6.5svn版本： svn1.6
-安装svn安装svn，一般选择yum方式安装比较简单(注：如果你还不知道什么是yum那么你和六个月前的我是一样的，赶紧拿起鸟哥[不是鸟叔]狂撸一个月吧，保证你会爱上linux)
-[root@liyong ~]# yum -y install mod_dav_svn
-#会自动安装mod_dav_svn">
+<meta name="twitter:title" content="celery">
+<meta name="twitter:description" content="Celery学习使用及想法
+Celery学习1.Messages are sent to exchanges.2.An exchange routes messages to one or more queues. Several exchange types exists, providing different ways to do routing, or implementing diffe">
 
 
 
@@ -84,7 +75,7 @@
   };
 </script>
 
-  <title> svn安装配置高级版本（使用httpd） | Yong-Lee's Blog </title>
+  <title> celery | Yong-Lee's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -204,7 +195,7 @@
             
             
               
-                svn安装配置高级版本（使用httpd）
+                celery
               
             
           </h1>
@@ -213,8 +204,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-03T01:20:19+08:00" content="2016-01-03">
-              2016-01-03
+            <time itemprop="dateCreated" datetime="2016-07-21T00:25:40+08:00" content="2016-07-21">
+              2016-07-21
             </time>
           </span>
 
@@ -237,39 +228,8 @@
       
 
       
-        <span itemprop="articleBody"><p></p><h1>svn安装配置高级版本（使用httpd）</h1><p></p>
-<p></p><h3>环境</h3><br>系统： centos6.5<br><br>svn版本： svn1.6<p></p>
-<p></p><h3>安装svn</h3><br>安装svn，一般选择yum方式安装比较简单(注：如果你还不知道什么是yum那么你和六个月前的我是一样的，赶紧拿起鸟哥[不是鸟叔]狂撸一个月吧，保证你会爱上linux)<p></p>
-<p><pre><code>[root@liyong ~]# yum -y install mod_dav_svn</code></pre></p>
-<p>#会自动安装mod_dav_svn及其依赖包:mod_dav_svn-1.6.11-9,neon-0.29.3-2,pakchois-0.4-3.2,subversion-1.6.11-9<br><br>直接安装这个就能把svn服务器直接KO！怎么样是不是觉得自己已经大杀特杀了</p>
-<p></p><h3>下面我们来安装httpd</h3><p></p>
-<p><pre><code>[root@liyong ~]# yum -y install httpd</code></pre><br>注：一般情况下，Linux服务器都是有httpd服务的，你可以检查下，如果没有则安装<br>检查方法：</p>
-<p><pre><code>[root@liyong ~]# vi /etc/httpd/conf.d/subversion.conf</code></pre><br>安装完svn后看是否有该目录&amp;文件，如果存在则不需要安装httpd了。</p>
-<p></p><h3>安装完成，接下来就是配置［这才是重头戏］</h3><br>配置svn仓库：<p></p>
-<p><pre><code>#创建svn目录<br>[root@liyong ~]# mkdir -p /home/svn/repos1  #仓库1<br>[root@liyong ~]# mkdir -p /home/svn/repos2  #仓库2</code></pre></p>
-<p>#可以任意配置，任意指定你喜欢的目录</p>
-<p>#建立svn版本库<br>[root@liyong ~]# svnadmin create /home/svn/repos1<br>[root@liyong ~]# svnadmin create /home/svn/repos2</p>
-<p>#有多少个仓库就执行多少次该命令，只需要换最后的名字即可<br>修改svn版本库配置文件：</p>
-<p><pre><code>[root@moshi ~]# vi /home/svn/repos1/conf/svnserve.conf</code></pre><br>修改文件结果如下：</p>
-<p><pre><code>[general]<br>anon-access = none<br>auth-access = write<br>password-db = /home/svn/conf/pwd.conf    #指向用户配置文件<br>authz-db = /home/svn/conf/authz.conf     #指向权限配置文件<br>realm = repos1                           #指向svn仓库地址</code></pre><br>注:其它仓库配置和该配置相同，只需要修改仓库路径<br><br>配置svn用户和权限：</p>
-<p><pre><code>[root@moshi ~]# vim /home/svn/conf/pwd.cof<br>[root@liyong ~]# vim /home/svn/conf/authz.conf</code></pre></p>
-<p>#这是2个步骤，我这里为更好的阅读，写在一起<br>配置用户<br>由于这个配置是我自定义的，所以要先vim创建该文件，也可以用其他方式创建。<br>[root@liyong ~]# vim /home/svn/conf/pwd.conf</p>
-<p>#保存退出<br>[root@liyong ~]# htpasswd -c /home/svn/conf/pwd.conf admin</p>
-<p>#根据提示输入密码，第一个用户才需要加-c,后面的用户不需要-c<br>[root@liyong ~]# htpasswd /home/svn/conf/pwd.conf test<br>[root@liyong ~]# vi /home/svn/conf/pwd.conf<br>在用户最上方加上[users]<br>注：加上<font color="red">[users]</font>这一步是很重要的，因为用htpasswd的方式会覆盖掉[users]，所以每次加完用户都需要回去补一下这个节点哦，不然报错我这里可不负责哦</p>
-<p><pre><code>配置权限<br>[root@liyong ~]# vim /home/svn/conf/authz.conf<br>文件内容如下：<br>[groups]<br>admin=user1,user2<br>test=user3<br>[/]<br>@admin=rw<br>[repos1:/]<br>user3=r</code></pre><br>注：<font color="red">[groups]</font>为组定义，可以在该组下加很多用户，以,分割，<br>但是该用户数据必须在<font color="red">/homd/svn/conf/pwd.conf</font>中定义好,<font color="red">[/]</font>表示根目录以下的权限定义<font color="red">[repos1:/]</font>表示仓库下的权限定义。如果要分项目，则以此规则类推：<br><br>如：<font color="red">[repos1:/aaa]</font>则表示仓库下的<font color="red">aaa</font>项目的权限定义。<br></p>
-<p><font color="red">@admin</font> 表示admin这个组下的用户权限。<br></p>
-<p><font color="red">user1=r</font> 表示user1这个用户的权限。<br><br>权限类型：r，w，rw 分别表示只读，只写，读写。如果是user1= 这种空情况则表示没有。<br>OK，到此svn配置完成。我们可以把默认的配置文件删除。</p>
-<p><pre><code>[root@liyong ~]# rm -rf /home/svn/repos1/conf/passwd<br>[root@liyong ~]# rm -rf /home/svn/repos2/conf/authz</code></pre></p>
-<p>##多个仓库则删除多个仓库对应的文件即可<br>建立启动svn的用户：</p>
-<p><pre><code>[root@liyong ~]# useradd svn                    ##如果提示svn账户已存在，则执行以下命令<br>[root@liyong ~]# passwd svn                     ##根据提示修改下密码，不能过于简单，可使用常用密码<br>[root@liyong ~]# chown -R svn:svn /home/svn/    ##允许用户svn访问版本库<br>[root@liyong ~]# chmod –R o+rw /home/svn        ##解决windows检出提交提示/home/svn/db/txn-current-lock’错误<br></code></pre><br>配置svn的端口：</p>
-<p><pre><code>[root@liyong ~]# vi /etc/httpd/conf/httpd.conf</code></pre><br>找到<br></p>
-<p> #Listen 12.34.56.78:80这一行，<br>Listen 9999     ##9999就是svn的端口，默认是80，你可以修改为自己想要的。不建议使用默认的80端口，原因大家肯定都知道对于web，80真的是太关键了<br><br>配置httpd：</p>
-<p><pre><code>[root@liyong ~]# vi /etc/httpd/conf.d/subversion.conf</code></pre><br>修改内容为：</p>
-<p><pre><code><location svn="">DAV svn<br>SVNListParentPath on<br>SVNParentPath /home/svn<br>AuthType Basic<br>AuthName “Authorization”<br>AuthUserFile /home/svn/conf/pwd.conf                   ##对应你的用户配置文件<br>AuthzSVNAccessFile /home/svn/conf/authz.conf      ##对应你的权限配置文件<br>Require valid-user<br></location></code></pre><br>保存退出！<br><br>重启httpd服务。</p>
-<p><pre><code>[root@liyong ~]# service httpd restart<br>停止 httpd:                                               [确定]<br>正在启动 httpd：                                           [确定]<br></code></pre><br>出现以上字样，表名httpd的配置已经成功启动成功。<br><br>启动svn：</p>
-<p><pre><code>[root@liyong ~]# svnserve -d -r /home/svn/</code></pre><br>查看svn服务是否正常：</p>
-<p><pre><code>[root@liyong ~]# ps aux|grep svn</code></pre></p>
-<p> #出现以下内容说明svn服务已经成功启动<br>root      8610  0.0  0.0 152864   740 ?        Ss   11:25   0:00 svnserve -d -r /home/svn/repos1/<br>root     13128  0.0  0.0 103252   876 pts/0    S+   14:00   0:00 grep svn<br><br>大功告成，现在你就可以在浏览器中输入：服务器Ip＋端口＋httpd配置中的<localtion svn="">[注：这里可能在上面的配置文件中可能没有显示出来，各位在这里留意下]<br><br>如：<a href="http://192.169.1.1:9999/svn" target="_blank" rel="external">http://192.169.1.1:9999/svn</a><br><br>此时，会提示你输入用户名密码，填上你之前配置好的就可以登录了，是不是感觉自己已经超神了。victory！</localtion></p>
+        <span itemprop="articleBody"><p></p><h1>Celery学习使用及想法</h1><p></p>
+<h3>Celery学习</h3><br>1.Messages are sent to exchanges.<br>2.An exchange routes messages to one or more queues. Several exchange types exists, providing different ways to do routing, or implementing different messaging scenarios.<br>3.The message waits in the queue until someone consumes it.<br>4.The message is deleted from the queue when it has been acknowledged.<br><br><br><h3>Celery使用</h3>
 </span>
       
     </div>
@@ -281,17 +241,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/31/python装饰器理解/" rel="next" title="python装饰器理解">
-                <i class="fa fa-chevron-left"></i> python装饰器理解
+              <a href="/2016/01/03/svn安装配置高级版本（使用httpd）/" rel="next" title="svn安装配置高级版本（使用httpd）">
+                <i class="fa fa-chevron-left"></i> svn安装配置高级版本（使用httpd）
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/21/celery/" rel="prev" title="celery">
-                celery <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,7 +361,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">svn安装配置高级版本（使用httpd）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">安装svn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">下面我们来安装httpd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">安装完成，接下来就是配置［这才是重头戏］</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">Celery学习使用及想法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">Celery学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">Celery使用</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
